@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { Badge } from './ui/badge';
 import { SendHorizonal } from 'lucide-react';
 
@@ -29,20 +29,9 @@ export default function RepoInputBar({
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    if (!isValidGitHubUrl(repoUrl)) {
-      setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo)');
-      return;
-    }
-    setError('');
-    setRepoUrl('');
-  };
-
   return (
     <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl'>
-      <form action='/api/github' method='POST' onSubmit={(e) => handleSubmit(e)}>
+      <form>
         <div className='flex justify-center items-center p-3'>
           <input
             type='text'
