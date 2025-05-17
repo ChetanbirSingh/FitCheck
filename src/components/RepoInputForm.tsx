@@ -20,6 +20,9 @@ export default function RepoInputForm({
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <label htmlFor='url' className='sr-only'>
+          GitHub repository URL
+        </label>
         <div className='flex justify-center items-center p-3'>
           <input
             type='text'
@@ -35,6 +38,7 @@ export default function RepoInputForm({
           <div className='px-2'>
             <button
               type='submit'
+              aria-label='Submit GitHub repository URL'
               className={`h-12 w-12 flex items-center justify-center rounded-full 
   ${
     repoUrl && !error
