@@ -55,34 +55,36 @@ export default function RepoInputBar({
   };
 
   return (
-    <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl'>
-      <div className='max-h-64 overflow-y-auto pr-2'>
+    <>
+      <div className='w-full max-w-3xl mx-auto max-h-64 overflow-y-auto pr-2'>
         {filesList.length > 0 && <FileChipList result={filesList} onRemoveFiles={handleRemove} />}
       </div>
-      <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
-      <div className='ml-10 flex gap-2 p-2'>
-        <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
-          {framework}
-        </Badge>
-        <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
-          {persona}
-        </Badge>
+      <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl'>
+        <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
+        <div className='ml-10 flex gap-2 p-2'>
+          <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
+            {framework}
+          </Badge>
+          <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
+            {persona}
+          </Badge>
+        </div>
+        {isLoading && <p className='text-sm text-gray-500 text-center pb-2'>Fetching data...</p>}
+
+        {filesList.length > 0 && (
+          <div className='flex items-center justify-center gap-2 text-sm text-blue-400 pb-2'>
+            <Info className='w-4 h-4' />
+            <span>Please clear the current files to enter a new repo URL.</span>
+          </div>
+        )}
+
+        {(error || swrError) && (
+          <div className='flex items-center justify-center gap-2 text-sm text-red-500 font-medium pb-2'>
+            <AlertCircle className='w-4 h-4' />
+            <span>{error || (swrError as Error).message}</span>
+          </div>
+        )}
       </div>
-      {isLoading && <p className='text-sm text-gray-500 text-center pb-2'>Fetching data...</p>}
-
-      {filesList.length > 0 && (
-        <div className='flex items-center justify-center gap-2 text-sm text-blue-400 pb-2'>
-          <Info className='w-4 h-4' />
-          <span>Please clear the current files to enter a new repo URL.</span>
-        </div>
-      )}
-
-      {(error || swrError) && (
-        <div className='flex items-center justify-center gap-2 text-sm text-red-500 font-medium pb-2'>
-          <AlertCircle className='w-4 h-4' />
-          <span>{error || (swrError as Error).message}</span>
-        </div>
-      )}
-    </div>
+    </>
   );
 }
