@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Badge } from './ui/badge';
+import FileChipList from './FileChipList';
 import { SendHorizonal } from 'lucide-react';
 
 const isValidGitHubUrl = (url: string): boolean => {
@@ -18,6 +19,7 @@ export default function RepoInputBar({
 }) {
   const [repoUrl, setRepoUrl] = useState('');
   const [error, setError] = useState('');
+  const [filesList, setFilesList] = useState<string[]>([]);
 
   const handleBlur = () => {
     if (!repoUrl.trim()) return;
@@ -29,9 +31,46 @@ export default function RepoInputBar({
     }
   };
 
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setRepoUrl('');
+
+    if (!isValidGitHubUrl(repoUrl)) {
+      setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/extract-files', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: repoUrl,
+          techstack: framework,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setFilesList([]);
+        throw new Error(data.error);
+      }
+
+      setFilesList(data);
+    } catch (err) {
+      setError(String(err));
+    }
+  }
+
+  const handleRemove = (fileToRemove: string) => {
+    setFilesList((prev) => prev.filter((file) => file !== fileToRemove));
+  };
+
   return (
     <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl'>
-      <form>
+      <div className='max-h-64 overflow-y-auto pr-2'>
+        {filesList.length > 0 && <FileChipList result={filesList} onRemoveFiles={handleRemove} />}
+      </div>
+      <form onSubmit={handleSubmit}>
         <div className='flex justify-center items-center p-3'>
           <input
             type='text'
