@@ -1,4 +1,4 @@
-import { SendHorizonal } from "lucide-react";
+import { SendHorizonal } from 'lucide-react';
 
 type RepoInputFormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -6,9 +6,17 @@ type RepoInputFormProps = {
   setRepoUrl: (url: string) => void;
   handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   error: string | null;
+  filesList: string[];
 };
 
-export default function RepoInputForm({handleSubmit, repoUrl, setRepoUrl, handleBlur, error}: RepoInputFormProps) {
+export default function RepoInputForm({
+  handleSubmit,
+  repoUrl,
+  setRepoUrl,
+  handleBlur,
+  error,
+  filesList,
+}: RepoInputFormProps) {
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -19,6 +27,7 @@ export default function RepoInputForm({handleSubmit, repoUrl, setRepoUrl, handle
             id='url'
             className={'w-2xl px-8 py-2 bg-transparent text-sm outline-none transition-all'}
             name='url'
+            disabled={filesList.length > 0 ? true : false}
             value={repoUrl}
             onChange={(e) => setRepoUrl(e.target.value)}
             onBlur={handleBlur}

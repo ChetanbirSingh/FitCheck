@@ -5,7 +5,7 @@ import { Badge } from './ui/badge';
 import FileChipList from './FileChipList';
 import RepoInputForm from './RepoInputForm';
 import { useRepoFiles } from '@/app/hooks/useRepoFiles';
-
+import { AlertCircle, Info } from 'lucide-react';
 const isValidGitHubUrl = (url: string): boolean => {
   const pattern = /^https:\/\/github\.com\/[^\/\s]+\/[^\/\s]+$/;
   return pattern.test(url.trim());
@@ -59,7 +59,7 @@ export default function RepoInputBar({
       <div className='max-h-64 overflow-y-auto pr-2'>
         {filesList.length > 0 && <FileChipList result={filesList} onRemoveFiles={handleRemove} />}
       </div>
-      <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error }} />
+      <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
       <div className='ml-10 flex gap-2 p-2'>
         <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
           {framework}
@@ -69,8 +69,20 @@ export default function RepoInputBar({
         </Badge>
       </div>
       {isLoading && <p className='text-sm text-gray-500 text-center pb-2'>Fetching data...</p>}
-      {error && <p className='text-sm text-red-500 text-center pb-2'>{error}</p>}
-      {swrError && <p className='text-sm text-red-500 text-center pb-2'>{swrError.message}</p>}
+
+      {filesList.length > 0 && (
+        <div className='flex items-center justify-center gap-2 text-sm text-blue-400 pb-2'>
+          <Info className='w-4 h-4' />
+          <span>Please clear the current files to enter a new repo URL.</span>
+        </div>
+      )}
+
+      {(error || swrError) && (
+        <div className='flex items-center justify-center gap-2 text-sm text-red-500 font-medium pb-2'>
+          <AlertCircle className='w-4 h-4' />
+          <span>{error || (swrError as Error).message}</span>
+        </div>
+      )}
     </div>
   );
 }
