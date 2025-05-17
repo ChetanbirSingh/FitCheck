@@ -1,7 +1,10 @@
 export async function POST(req: Request) {
   const { url, files } = await req.json();
   const filesArray = files;
-  const githubUrl = url;
+  const githubUrl = url
+    .replace('https://github.com/', 'https://api.github.com/repos/')
+    .replace(/\/$/, '')
+    .concat('/contents');
   try {
     const fetchedCode = await fetchCode(githubUrl, filesArray);
     return Response.json(fetchedCode, { status: 200 });
