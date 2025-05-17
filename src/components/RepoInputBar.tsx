@@ -1,9 +1,10 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Badge } from './ui/badge';
 import FileChipList from './FileChipList';
 import RepoInputForm from './RepoInputForm';
+import { useRepoFiles } from '@/app/hooks/useRepoFiles';
 
 const isValidGitHubUrl = (url: string): boolean => {
   const pattern = /^https:\/\/github\.com\/[^\/\s]+\/[^\/\s]+$/;
@@ -20,6 +21,14 @@ export default function RepoInputBar({
   const [repoUrl, setRepoUrl] = useState('');
   const [error, setError] = useState('');
   const [filesList, setFilesList] = useState<string[]>([]);
+  const [submittedUrl, setSubmittedUrl] = useState('');
+  const { files, error: swrError, isLoading } = useRepoFiles(submittedUrl, framework);
+
+  useEffect(() => {
+    if (files.length > 0) {
+      setFilesList(files);
+    }
+  }, [files]);
 
   const handleBlur = () => {
     if (!repoUrl.trim()) return;
@@ -33,32 +42,12 @@ export default function RepoInputBar({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setRepoUrl('');
-
     if (!isValidGitHubUrl(repoUrl)) {
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       return;
     }
-
-    try {
-      const response = await fetch('/api/extract-files', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          url: repoUrl,
-          techstack: framework,
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        setFilesList([]);
-        throw new Error(data.error);
-      }
-
-      setFilesList(data);
-    } catch (err) {
-      setError(String(err));
-    }
+    setSubmittedUrl(repoUrl);
+    setRepoUrl('');
   }
 
   const handleRemove = (fileToRemove: string) => {
@@ -70,7 +59,7 @@ export default function RepoInputBar({
       <div className='max-h-64 overflow-y-auto pr-2'>
         {filesList.length > 0 && <FileChipList result={filesList} onRemoveFiles={handleRemove} />}
       </div>
-      <RepoInputForm {... {handleSubmit, repoUrl, setRepoUrl, handleBlur, error} } />
+      <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error }} />
       <div className='ml-10 flex gap-2 p-2'>
         <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
           {framework}
@@ -79,7 +68,9 @@ export default function RepoInputBar({
           {persona}
         </Badge>
       </div>
+      {isLoading && <p className='text-sm text-gray-500 text-center pb-2'>Fetching data...</p>}
       {error && <p className='text-sm text-red-500 text-center pb-2'>{error}</p>}
+      {swrError && <p className='text-sm text-red-500 text-center pb-2'>{swrError.message}</p>}
     </div>
   );
 }
