@@ -1,4 +1,6 @@
-export async function POST(req: Request) {
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(req: NextRequest) {
   const { url, files } = await req.json();
   const filesArray = files;
   const githubUrl = url
@@ -7,9 +9,9 @@ export async function POST(req: Request) {
     .concat('/contents');
   try {
     const fetchedCode = await fetchCode(githubUrl, filesArray);
-    return Response.json(fetchedCode, { status: 200 });
+    return NextResponse.json(fetchedCode, { status: 200 });
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       {
         error: 'GitHub fetch failed. Check if the URL is correct and the repo is public.',
       },

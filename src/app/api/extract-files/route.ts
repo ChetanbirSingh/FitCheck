@@ -1,3 +1,4 @@
+import { NextResponse, NextRequest } from 'next/server';
 type Techstack = 'html_css' | 'react' | 'next' | 'vue';
 
 const supportedFileTypes: Record<Techstack, string[]> = {
@@ -26,11 +27,11 @@ const ignoredFiles: string[] = [
   'jest.config',
 ];
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const { url, techstack } = await req.json();
 
   if (!url) {
-    return Response.json({ error: 'Missing GitHub URL.' }, { status: 400 });
+    return NextResponse.json({ error: 'Missing GitHub URL.' }, { status: 400 });
   }
 
   const githubUrl = url
@@ -40,21 +41,16 @@ export async function POST(req: Request) {
 
   try {
     const processedData = await fetchMatchingFileNames(githubUrl, techstack);
-    return Response.json(processedData, { status: 200 });
+    return NextResponse.json(processedData, { status: 200 });
   } catch (error) {
-    return Response.json(
-      {
-        error: 'GitHub fetch failed. Check if the URL is correct and the repo is public.',
-      },
+    return NextResponse.json(
+      { error: 'GitHub fetch failed. Check if the URL is correct and the repo is public.' },
       { status: 500 },
     );
   }
 }
 
-async function fetchMatchingFileNames(
-  githubUrl: string,
-  techstack: Techstack,
-): Promise<string[]> {
+async function fetchMatchingFileNames(githubUrl: string, techstack: Techstack): Promise<string[]> {
   const response = await fetch(githubUrl, {
     headers: {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
