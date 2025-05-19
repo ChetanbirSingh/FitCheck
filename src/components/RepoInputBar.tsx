@@ -22,7 +22,7 @@ export default function RepoInputBar({
   const [error, setError] = useState('');
   const [filesList, setFilesList] = useState<string[]>([]);
   const [submittedUrl, setSubmittedUrl] = useState('');
-  const { files, error: swrError, isLoading } = useRepoFiles(submittedUrl, framework);
+  const { files, error: serverError, isLoading } = useRepoFiles(submittedUrl, framework);
 
   useEffect(() => {
     if (files.length > 0) {
@@ -35,6 +35,7 @@ export default function RepoInputBar({
 
     if (!isValidGitHubUrl(repoUrl)) {
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
+      setRepoUrl('');
     } else {
       setError('');
     }
@@ -42,12 +43,12 @@ export default function RepoInputBar({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setRepoUrl('');
     if (!isValidGitHubUrl(repoUrl)) {
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       return;
     }
     setSubmittedUrl(repoUrl);
-    setRepoUrl('');
   }
 
   const handleRemove = (fileToRemove: string) => {
@@ -74,14 +75,18 @@ export default function RepoInputBar({
         {filesList.length > 0 && (
           <div className='flex items-center justify-center gap-2 text-sm text-blue-400 pb-2'>
             <Info className='w-4 h-4' />
-            <span>Please clear the current files to enter a new repo URL.</span>
+            <span>
+              <p>Please clear the current files to enter a new repo URL.</p>
+            </span>
           </div>
         )}
 
-        {(error || swrError) && (
+        {(error || serverError) && (
           <div className='flex items-center justify-center gap-2 text-sm text-red-500 font-medium pb-2'>
             <AlertCircle className='w-4 h-4' />
-            <span>{error || (swrError as Error).message}</span>
+            <span>
+              <p>{error || serverError.message}</p>
+            </span>
           </div>
         )}
       </div>
