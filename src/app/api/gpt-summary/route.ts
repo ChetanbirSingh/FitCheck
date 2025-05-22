@@ -17,9 +17,21 @@ export async function POST(req: NextRequest) {
         role: 'system',
         content: `${prompt} Return JSON per point with "heading", "text", and "detail" keys. Each item = 1 point of feedback.`,
       },
-      { role: 'user', content: code },
+      { role: 'user', content: formatCodeToString(code) },
     ],
   });
 
   return result.toDataStreamResponse();
+}
+
+function formatCodeToString(codeObj: Record<string, { code: string }>) {
+  return Object.entries(codeObj)
+    .map(([filename, { code }]) => {
+      const trimmedCode = code
+        .split('\n')
+        .map((line) => line.trimStart())
+        .join('\n');
+      return `${filename}\n\`\`\`\n${trimmedCode}\n\`\`\``;
+    })
+    .join('\n\n');
 }
