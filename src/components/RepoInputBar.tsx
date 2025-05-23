@@ -5,6 +5,8 @@ import { Badge } from './ui/badge';
 import FileChipList from './FileChipList';
 import RepoInputForm from './RepoInputForm';
 import { useRepoFiles } from '@/app/hooks/useRepoFiles';
+import { useRepoFileCode } from '@/app/hooks/useRepoFileCode';
+
 import { AlertCircle, Info } from 'lucide-react';
 const isValidGitHubUrl = (url: string): boolean => {
   const pattern = /^https:\/\/github\.com\/[^\/\s]+\/[^\/\s]+$/;
@@ -22,7 +24,16 @@ export default function RepoInputBar({
   const [error, setError] = useState('');
   const [filesList, setFilesList] = useState<string[]>([]);
   const [submittedUrl, setSubmittedUrl] = useState('');
-  const { files, error: serverError, isLoading } = useRepoFiles(submittedUrl, framework);
+  const {
+    files,
+    error: repoFetchError,
+    isLoading: isFetchingRepoFiles,
+  } = useRepoFiles(submittedUrl, framework, filesList);
+  const {
+    code,
+    error: codeFetchError,
+    isLoading: isFetchingRepoCode,
+  } = useRepoFileCode(submittedUrl, filesList);
 
   useEffect(() => {
     if (files.length > 0) {
@@ -43,7 +54,6 @@ export default function RepoInputBar({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setRepoUrl('');
     if (!isValidGitHubUrl(repoUrl)) {
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       return;
@@ -70,7 +80,13 @@ export default function RepoInputBar({
             {persona}
           </Badge>
         </div>
-        {isLoading && <p className='text-sm text-gray-500 text-center pb-2'>Fetching data...</p>}
+
+        {isFetchingRepoFiles && (
+          <p className='text-sm text-gray-500 text-center pb-2'>Fetching file List...</p>
+        )}
+        {isFetchingRepoCode && (
+          <p className='text-sm text-gray-500 text-center pb-2'>Fetching Code</p>
+        )}
 
         {filesList.length > 0 && (
           <div className='flex items-center justify-center gap-2 text-sm text-blue-400 pb-2'>
@@ -81,11 +97,11 @@ export default function RepoInputBar({
           </div>
         )}
 
-        {(error || serverError) && (
+        {(error || codeFetchError || repoFetchError) && (
           <div className='flex items-center justify-center gap-2 text-sm text-red-500 font-medium pb-2'>
             <AlertCircle className='w-4 h-4' />
             <span>
-              <p>{error || serverError.message}</p>
+              <p>{error || codeFetchError.message || repoFetchError.message}</p>
             </span>
           </div>
         )}
