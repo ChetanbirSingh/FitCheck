@@ -11,7 +11,7 @@ interface ReviewType {
 
 const ReviewContext = createContext<ReviewType | null>(null);
 
-export const GptProvider = ({ children }: { children: ReactNode }) => {
+export const ReviewProvider = ({ children }: { children: ReactNode }) => {
   const [output, setOutput] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState('');
@@ -64,6 +64,6 @@ export const GptProvider = ({ children }: { children: ReactNode }) => {
 
 export function useReviewContext() {
   const context = useContext(ReviewContext);
-  if (!context) throw new Error('useGptContext must be used within a GptProvider');
+  if (!context) throw new Error('useReviewContext must be used within a ReviewContext');
   return context;
 }
