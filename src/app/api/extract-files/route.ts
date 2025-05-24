@@ -1,11 +1,14 @@
 import { NextResponse, NextRequest } from 'next/server';
-type Techstack = 'html_css' | 'react' | 'next' | 'vue';
+export type Techstack = 'html_css' | 'react' | 'next' | 'vue' | 'svelte' | 'solid' | 'angular';
 
-const supportedFileTypes: Record<Techstack, string[]> = {
+export const supportedFileTypes: Record<Techstack, string[]> = {
   html_css: ['.html', '.css', '.js'],
   react: ['.jsx', '.js', '.css', '.scss'],
   next: ['.tsx', '.ts', '.jsx', '.js', '.css', '.scss'],
   vue: ['.vue', '.js', '.css', '.scss'],
+  svelte: ['.svelte', '.js', '.css'],
+  solid: ['.jsx', '.js', '.ts', '.tsx'],
+  angular: ['.ts', '.html', '.css'],
 };
 
 const ignoredFiles: string[] = [
