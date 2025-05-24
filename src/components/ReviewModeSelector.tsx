@@ -4,7 +4,14 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
-const modes = {
+interface ModesStructure {
+  [key: string]: {
+    icon: string;
+    caption: string;
+  };
+}
+
+const modes: ModesStructure = {
   mentor: {
     icon: '🧠',
     caption: 'Growth-focused, honest feedback',
