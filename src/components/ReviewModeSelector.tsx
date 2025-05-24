@@ -13,7 +13,6 @@ type ModesStructure = {
   };
 };
 
-
 const modes: ModesStructure = {
   mentor: {
     icon: '🧠',
@@ -53,7 +52,7 @@ export default function PersonSelection() {
         Choose Persona
       </motion.h2>
 
-      <div className='flex justify-center items-center gap-4 flex-wrap'>
+      <div className='flex justify-center items-center gap-4 flex-wrap p-7'>
         {Object.entries(modes).map(([mode, { icon, caption }], idx) => {
           const isSelected = selected === mode;
           return (
@@ -68,18 +67,16 @@ export default function PersonSelection() {
               }}
               whileTap={{ scale: 0.97 }}
               whileHover={{ scale: 1.06 }}
-              className={`flex flex-col justify-center items-center p-6 cursor-pointer rounded-3xl transition-colors duration-300 ${
+              className={`w-[200px] md:w-[300px] lg:w-[400px] h-auto flex flex-col justify-center items-center p-9 cursor-pointer rounded-l transition-colors duration-300 hover:bg-[rgba(163,230,53,0.47)] ${
                 isSelected ? 'bg-[rgba(163,230,53,0.47)]' : 'bg-transparent'
               }`}
               onClick={() => {
                 setSelected(mode as ModesType);
-                setTimeout(() => {
-                  router.push(`?persona=${mode}`);
-                }, 300);
+                router.push(`?persona=${mode}`);
               }}
             >
               <span
-                className='text-6xl font-bold mb-2 z-10'
+                className='text-[64px] md:text-[80px] mb-4'
                 role='img'
                 aria-label={`${mode.charAt(0).toUpperCase() + mode.slice(1)} icon`}
               >
