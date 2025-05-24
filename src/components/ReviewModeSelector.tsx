@@ -4,12 +4,15 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
-interface ModesStructure {
-  [key: string]: {
+export type ModesType = 'mentor' | 'recruiter' | 'senior' | 'designer' | 'peer';
+
+type ModesStructure = {
+  [key in ModesType]: {
     icon: string;
     caption: string;
   };
-}
+};
+
 
 const modes: ModesStructure = {
   mentor: {
@@ -35,7 +38,7 @@ const modes: ModesStructure = {
 };
 
 export default function PersonSelection() {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<ModesType | null>(null);
   const router = useRouter();
 
   return (
@@ -69,7 +72,7 @@ export default function PersonSelection() {
                 isSelected ? 'bg-[rgba(163,230,53,0.47)]' : 'bg-transparent'
               }`}
               onClick={() => {
-                setSelected(mode);
+                setSelected(mode as ModesType);
                 setTimeout(() => {
                   router.push(`?persona=${mode}`);
                 }, 300);
