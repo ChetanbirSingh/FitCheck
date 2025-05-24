@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 
 export type ModesType = 'mentor' | 'recruiter' | 'senior' | 'designer' | 'peer';
 
@@ -36,9 +35,12 @@ const modes: ModesStructure = {
   },
 };
 
-export default function PersonSelection() {
+export default function PersonSelection({
+  handleClick,
+}: {
+  handleClick: (mode: ModesType) => void;
+}) {
   const [selected, setSelected] = useState<ModesType | null>(null);
-  const router = useRouter();
 
   return (
     <section id='choose-persona-section'>
@@ -72,7 +74,7 @@ export default function PersonSelection() {
               }`}
               onClick={() => {
                 setSelected(mode as ModesType);
-                router.push(`?persona=${mode}`);
+                handleClick(mode as ModesType);
               }}
             >
               <span
