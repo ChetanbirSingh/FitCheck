@@ -68,7 +68,7 @@ export default function PersonSelection() {
               whileTap={{ scale: 0.97 }}
               whileHover={{ scale: 1.06 }}
               className={`w-[200px] md:w-[300px] lg:w-[400px] h-auto flex flex-col justify-center items-center p-9 cursor-pointer rounded-l transition-colors duration-300 hover:bg-[rgba(163,230,53,0.47)] ${
-                isSelected ? 'bg-[rgba(163,230,53,0.47)]' : 'bg-transparent'
+                isSelected ? 'bg-accent-lime' : 'bg-transparent'
               }`}
               onClick={() => {
                 setSelected(mode as ModesType);

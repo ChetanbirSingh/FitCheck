@@ -3,6 +3,7 @@
 :root {
   --background: #18181b;
   --foreground: #ffffff;
+  --accent-lime: rgba(163, 230, 53, 0.47);
 }
 
 body {
@@ -25,4 +26,8 @@ h2 {
 
 p {
   font-size: 1rem;
+}
+
+.bg-accent-lime {
+  background-color: var(--accent-lime);
 }
