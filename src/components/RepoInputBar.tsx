@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Badge } from './ui/badge';
 import FileChipList from './FileChipList';
 import RepoInputForm from './RepoInputForm';
@@ -36,6 +37,7 @@ export default function RepoInputBar({
     isLoading: isFetchingRepoCode,
   } = useRepoFileCode(submittedUrl, filesList);
   const { isStreaming, error: reviewError, streamSummary } = useReviewContext();
+  const route = useRouter();
 
   useEffect(() => {
     if (files.length > 0) {
@@ -45,7 +47,6 @@ export default function RepoInputBar({
 
   const handleBlur = () => {
     if (!repoUrl.trim()) return;
-
     if (!isValidGitHubUrl(repoUrl)) {
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       setRepoUrl('');
@@ -60,7 +61,9 @@ export default function RepoInputBar({
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       return;
     } else if (filesList.length > 0) {
+      setRepoUrl('');
       streamSummary(code, persona);
+      route.push(`/review/${persona}/${framework}`)
     }
     setSubmittedUrl(repoUrl);
   }
