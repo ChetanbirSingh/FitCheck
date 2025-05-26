@@ -57,15 +57,27 @@ export default function RepoInputBar({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     if (!isValidGitHubUrl(repoUrl)) {
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       return;
-    } else if (filesList.length > 0) {
-      setRepoUrl('');
-      streamSummary(code, persona);
-      route.push(`/review/${persona}/${framework}`)
     }
-    setSubmittedUrl(repoUrl);
+
+    try {
+      if (filesList.length > 0) {
+        setRepoUrl('');
+        await streamSummary(code, persona);
+        route.push(`/review/${persona}/${framework}`);
+      }
+
+      setSubmittedUrl(repoUrl);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unexpected error occurred.');
+      }
+    }
   }
 
   const handleRemove = (fileToRemove: string) => {
@@ -111,7 +123,7 @@ export default function RepoInputBar({
           <div className='flex items-center justify-center gap-2 text-sm text-red-500 font-medium pb-2'>
             <AlertCircle className='w-4 h-4' />
             <span>
-              <p>{error || codeFetchError.message || repoFetchError.message || reviewError}</p>
+              <p>{error || codeFetchError?.message || repoFetchError?.message || reviewError}</p>
             </span>
           </div>
         )}
