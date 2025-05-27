@@ -42,7 +42,7 @@ export default function ReviewPage() {
 
   return (
     <div className='text-center'>
-      <h1 className='text-4xl font-extrabold tracking-tight text-white'>Setup Review</h1>
+      <h1>Setup Review</h1>
       <div className='flex justify-between w-full max-w-md mx-auto'>
         {step > 1 && (
           <button

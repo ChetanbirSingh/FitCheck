@@ -26,9 +26,7 @@ export default function TechstackSelection({
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        className='text-center text-xl sm:text-2xl md:text-3xl font-bold text-white'
-      >
+        transition={{ duration: 0.5, ease: 'easeOut' }}>
         What is your techstack
       </motion.h2>
 

@@ -48,10 +48,8 @@ export default function PersonSelection({
         id='choose-persona-heading'
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        className='text-center mb-6 text-2xl font-semibold'
-      >
-        Who do you want feedback from
+        transition={{ duration: 0.5, ease: 'easeOut' }}>
+        Who do you want feedback from?
       </motion.h2>
 
       <div className='flex justify-center items-center gap-4 flex-wrap p-7'>
@@ -69,7 +67,7 @@ export default function PersonSelection({
               }}
               whileTap={{ scale: 0.97 }}
               whileHover={{ scale: 1.06 }}
-              className={`w-[200px] md:w-[300px] lg:w-[400px] h-auto flex flex-col justify-center items-center p-9 cursor-pointer rounded-l transition-colors duration-300 hover:bg-[rgba(163,230,53,0.47)] ${
+              className={`w-full md:w-[300px] lg:w-[400px] h-auto flex flex-col justify-center items-center p-9 cursor-pointer rounded-l transition-colors duration-300 hover:bg-[rgba(163,230,53,0.47)] ${
                 isSelected ? 'bg-accent-lime' : 'bg-transparent'
               }`}
               onClick={() => {
