@@ -11,6 +11,7 @@ import SelectionPills from './SelectionPills';
 import { ModesType } from './PersonSelection';
 import { Techstack } from '@/app/api/extract-files/route';
 import { useRouter } from 'next/navigation';
+import { Badge } from './ui/badge';
 
 const isValidGitHubUrl = (url: string): boolean => {
   const pattern = /^https:\/\/github\.com\/[^\/\s]+\/[^\/\s]+$/;
@@ -92,6 +93,14 @@ export default function RepoInputBar({
       </div>
       <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl pb-2'>
         <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
+        <div className='ml-10 flex gap-2 p-2'>
+          <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
+            {framework}
+          </Badge>
+          <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
+            {persona}
+          </Badge>
+        </div>
         {isFetchingRepoFiles && (
           <p className='text-sm text-gray-500 text-center pb-2'>Fetching file List...</p>
         )}
