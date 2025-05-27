@@ -27,59 +27,55 @@ export default function TechstackSelection({
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className='text-center text-2xl font-bold'
+        className='text-center text-xl sm:text-2xl md:text-3xl font-bold text-white'
       >
         What is your techstack
       </motion.h2>
 
-      <div>
-        <h3 className='text-lg font-semibold text-zinc-100 mb-2 px-2'>
-          💻 We'll analyze files from:
-        </h3>
-
-        <div className='overflow-x-auto scrollbar-hide max-w-5xl'>
-          <div
-            className='flex gap-4 whitespace-nowrap max-h-100 overflow-y-auto
+      <div className='w-full max-w-6xl'>
+        <p className='mb-4 px-2'>💻 We'll analyze files from:</p>
+        <div
+          className='flex gap-4 whitespace-nowrap max-h-100 overflow-y-auto px-2 py-4
             [&::-webkit-scrollbar]:h-2
             [&::-webkit-scrollbar-track]:bg-transparent
             [&::-webkit-scrollbar-thumb]:bg-zinc-500/20
             [&::-webkit-scrollbar-thumb]:rounded-full
             hover:[&::-webkit-scrollbar-thumb]:bg-zinc-500/30
             dark:[&::-webkit-scrollbar-thumb]:bg-zinc-400/20
-            dark:hover:[&::-webkit-scrollbar-thumb]:bg-zinc-400/30
-            px-2 py-4'
-          >
-            {Object.entries(techStackInfo).map(([tech, { caption, icon }], idx) => {
-              const isSelected = selected === tech;
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: 0.1 * idx,
-                    duration: 0.6,
-                    ease: 'easeOut',
-                  }}
-                  whileTap={{ scale: 0.97 }}
-                  whileHover={{ scale: 1.06 }}
-                  className={`w-[180px] sm:w-[220px] flex-shrink-0 p-6 rounded-2xl cursor-pointer border bg-zinc-900 border-zinc-700 transition-colors duration-300 ${
-                    isSelected ? 'bg-accent-lime' : 'bg-transparent'
-                  }`}
-                  onClick={() => {
-                    setSelected(tech as Techstack);
-                    handleClick(tech as Techstack);
-                  }}
-                >
-                  <span className='text-5xl mb-3'>{icon}</span>
-                  <span className='text-xs text-zinc-300'>{caption}</span>
-                  <h3 className='text-lg font-bold text-white mt-1'>
-                    {tech.replace('_', ' ').toUpperCase()}
-                  </h3>
-                </motion.div>
-              );
-            })}
-          </div>
+            dark:hover:[&::-webkit-scrollbar-thumb]:bg-zinc-400/30'
+        >
+          {Object.entries(techStackInfo).map(([tech, { caption, icon }], idx) => {
+            const isSelected = selected === tech;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.1 * idx,
+                  duration: 0.6,
+                  ease: 'easeOut',
+                }}
+                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.06 }}
+                className={`md:w-[250px] sm:w-[200px] p-6 sm:p-6 rounded-2xl cursor-pointer border transition-colors duration-300 flex-shrink-0 ${
+                  isSelected
+                    ? 'bg-accent-lime border-accent-lime/60'
+                    : 'bg-zinc-900 border-zinc-700'
+                }`}
+                onClick={() => {
+                  setSelected(tech as Techstack);
+                  handleClick(tech as Techstack);
+                }}
+              >
+                <span className='text-5xl mb-3'>{icon}</span>
+                <span className='text-xs text-zinc-300'>{caption}</span>
+                <h3 className='text-lg font-bold text-white mt-1'>
+                  {tech.replace('_', ' ').toUpperCase()}
+                </h3>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
