@@ -10,6 +10,7 @@ import { AlertCircle, Info } from 'lucide-react';
 import SelectionPills from './SelectionPills';
 import { ModesType } from './PersonSelection';
 import { Techstack } from '@/app/api/extract-files/route';
+import { useRouter } from 'next/navigation';
 
 const isValidGitHubUrl = (url: string): boolean => {
   const pattern = /^https:\/\/github\.com\/[^\/\s]+\/[^\/\s]+$/;
@@ -32,11 +33,13 @@ export default function RepoInputBar({
     error: repoFetchError,
     isLoading: isFetchingRepoFiles,
   } = useRepoFiles(submittedUrl, framework);
-  const { error: codeFetchError, isLoading: isFetchingRepoCode } = useRepoFileCode(
-    submittedUrl,
-    filesList,
-  );
-  const { isStreaming, error: reviewError } = useReviewContext();
+  const {
+    code,
+    error: codeFetchError,
+    isLoading: isFetchingRepoCode,
+  } = useRepoFileCode(submittedUrl, filesList);
+  const { isStreaming, error: reviewError, streamSummary } = useReviewContext();
+  const router = useRouter();
 
   useEffect(() => {
     if (files.length > 0) {
@@ -65,6 +68,8 @@ export default function RepoInputBar({
       if (filesList.length > 0) {
         setRepoUrl('');
         setSubmittedUrl(repoUrl);
+        router.push(`/review/result/?persona=${persona}&techstack=${framework}`);
+        streamSummary(code, persona);
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -82,10 +87,10 @@ export default function RepoInputBar({
 
   return (
     <>
-      <div className='w-full max-w-3xl mx-auto max-h-64 overflow-y-auto pr-2'>
+      <div className='w-full max-w-3xl mx-auto max-h-64 overflow-y-auto'>
         {filesList.length > 0 && <FileChipList result={filesList} onRemoveFiles={handleRemove} />}
       </div>
-      <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl'>
+      <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl pb-2'>
         <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
         {isFetchingRepoFiles && (
           <p className='text-sm text-gray-500 text-center pb-2'>Fetching file List...</p>
@@ -114,8 +119,8 @@ export default function RepoInputBar({
             </span>
           </div>
         )}
-        <SelectionPills framework={framework} persona={persona} />
       </div>
+      <SelectionPills framework={framework} persona={persona} />
     </>
   );
 }
