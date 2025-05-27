@@ -1,14 +1,15 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Badge } from './ui/badge';
 import FileChipList from './FileChipList';
 import RepoInputForm from './RepoInputForm';
 import { useRepoFiles } from '@/app/hooks/useRepoFiles';
 import { useRepoFileCode } from '@/app/hooks/useRepoFileCode';
 import { useReviewContext } from '@/app/hooks/useReviewContext';
 import { AlertCircle, Info } from 'lucide-react';
+import SelectionPills from './SelectionPills';
+import { ModesType } from './PersonSelection';
+import { Techstack } from '@/app/api/extract-files/route';
 
 const isValidGitHubUrl = (url: string): boolean => {
   const pattern = /^https:\/\/github\.com\/[^\/\s]+\/[^\/\s]+$/;
@@ -19,8 +20,8 @@ export default function RepoInputBar({
   persona,
   framework,
 }: {
-  persona: string;
-  framework: string;
+  persona: ModesType;
+  framework: Techstack;
 }) {
   const [repoUrl, setRepoUrl] = useState('');
   const [error, setError] = useState('');
@@ -37,7 +38,6 @@ export default function RepoInputBar({
     isLoading: isFetchingRepoCode,
   } = useRepoFileCode(submittedUrl, filesList);
   const { isStreaming, error: reviewError, streamSummary } = useReviewContext();
-  const route = useRouter();
 
   useEffect(() => {
     if (files.length > 0) {
@@ -66,11 +66,8 @@ export default function RepoInputBar({
     try {
       if (filesList.length > 0) {
         setRepoUrl('');
-        await streamSummary(code, persona);
-        route.push(`/review/${persona}/${framework}`);
+        setSubmittedUrl(repoUrl);
       }
-
-      setSubmittedUrl(repoUrl);
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -91,14 +88,7 @@ export default function RepoInputBar({
       </div>
       <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl'>
         <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
-        <div className='ml-10 flex gap-2 p-2'>
-          <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
-            {framework}
-          </Badge>
-          <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
-            {persona}
-          </Badge>
-        </div>
+        <SelectionPills framework={framework} persona={persona} />
 
         {isFetchingRepoFiles && (
           <p className='text-sm text-gray-500 text-center pb-2'>Fetching file List...</p>
