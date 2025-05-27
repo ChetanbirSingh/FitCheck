@@ -32,12 +32,11 @@ export default function RepoInputBar({
     error: repoFetchError,
     isLoading: isFetchingRepoFiles,
   } = useRepoFiles(submittedUrl, framework);
-  const {
-    code,
-    error: codeFetchError,
-    isLoading: isFetchingRepoCode,
-  } = useRepoFileCode(submittedUrl, filesList);
-  const { isStreaming, error: reviewError, streamSummary } = useReviewContext();
+  const { error: codeFetchError, isLoading: isFetchingRepoCode } = useRepoFileCode(
+    submittedUrl,
+    filesList,
+  );
+  const { isStreaming, error: reviewError } = useReviewContext();
 
   useEffect(() => {
     if (files.length > 0) {
@@ -62,7 +61,6 @@ export default function RepoInputBar({
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       return;
     }
-
     try {
       if (filesList.length > 0) {
         setRepoUrl('');
@@ -75,6 +73,7 @@ export default function RepoInputBar({
         setError('An unexpected error occurred.');
       }
     }
+    setSubmittedUrl(repoUrl);
   }
 
   const handleRemove = (fileToRemove: string) => {
@@ -88,8 +87,6 @@ export default function RepoInputBar({
       </div>
       <div className='w-full max-w-3xl mx-auto bg-[rgba(61,61,61,0.2)] rounded-2xl'>
         <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
-        <SelectionPills framework={framework} persona={persona} />
-
         {isFetchingRepoFiles && (
           <p className='text-sm text-gray-500 text-center pb-2'>Fetching file List...</p>
         )}
@@ -117,6 +114,7 @@ export default function RepoInputBar({
             </span>
           </div>
         )}
+        <SelectionPills framework={framework} persona={persona} />
       </div>
     </>
   );
