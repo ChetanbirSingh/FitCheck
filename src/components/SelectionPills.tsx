@@ -15,9 +15,12 @@ const personas = [
 
 const frameworks = [
   { value: 'react', label: 'React' },
+  { value: 'angular', label: 'Angular' },
   { value: 'next', label: 'Next.js' },
   { value: 'vue', label: 'Vue' },
   { value: 'html_css', label: 'HTML/CSS' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'solid', label: 'solid' },
 ];
 
 export default function SelectionPills({
