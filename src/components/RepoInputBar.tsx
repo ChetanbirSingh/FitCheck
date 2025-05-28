@@ -8,8 +8,8 @@ import { useRepoFileCode } from '@/app/hooks/useRepoFileCode';
 import { useReviewContext } from '@/app/hooks/useReviewContext';
 import { AlertCircle, Info } from 'lucide-react';
 import SelectionPills from './SelectionPills';
-import { ModesType } from './PersonSelection';
-import { Techstack } from '@/app/api/extract-files/route';
+import { ModesType } from '@/lib/constants';
+import { TechstackTypes } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
 import { Badge } from './ui/badge';
 
@@ -23,7 +23,7 @@ export default function RepoInputBar({
   framework,
 }: {
   persona: ModesType;
-  framework: Techstack;
+  framework: TechstackTypes;
 }) {
   const [repoUrl, setRepoUrl] = useState('');
   const [error, setError] = useState('');

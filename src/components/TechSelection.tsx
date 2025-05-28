@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Techstack } from '@/app/api/extract-files/route';
+import { TechstackTypes } from '@/lib/constants';
 import { useState } from 'react';
 
-const techStackInfo: Record<Techstack, { caption: string; icon: string }> = {
+const techStackInfo: Record<TechstackTypes, { caption: string; icon: string }> = {
   html_css: { caption: 'Static Sites', icon: '🌐' },
   react: { caption: 'Component-based UI', icon: '⚛️' },
   next: { caption: 'Fullstack React', icon: '🚀' },
@@ -17,9 +17,9 @@ const techStackInfo: Record<Techstack, { caption: string; icon: string }> = {
 export default function TechstackSelection({
   handleClick,
 }: {
-  handleClick: (tech: Techstack) => void;
+  handleClick: (tech: TechstackTypes) => void;
 }) {
-  const [selected, setSelected] = useState<Techstack | null>(null);
+  const [selected, setSelected] = useState<TechstackTypes | null>(null);
 
   return (
     <section className='px-4 py-10 space-y-10 flex justify-center items-center flex-col'>
@@ -62,8 +62,8 @@ export default function TechstackSelection({
                     : 'bg-zinc-900 border-zinc-700'
                 }`}
                 onClick={() => {
-                  setSelected(tech as Techstack);
-                  handleClick(tech as Techstack);
+                  setSelected(tech as TechstackTypes);
+                  handleClick(tech as TechstackTypes);
                 }}
               >
                 <span className='text-5xl mb-3'>{icon}</span>

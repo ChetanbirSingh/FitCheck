@@ -2,8 +2,8 @@
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
-import { ModesType } from './PersonSelection';
-import { Techstack } from '@/app/api/extract-files/route';
+import { ModesType } from '@/lib/constants';
+import { TechstackTypes } from '@/lib/constants';
 
 const personas = [
   { value: 'mentor', label: '🧠 Mentor' },
@@ -27,7 +27,7 @@ export default function SelectionPills({
   framework,
   persona,
 }: {
-  framework: Techstack;
+  framework: TechstackTypes;
   persona: ModesType;
 }) {
   const router = useRouter();

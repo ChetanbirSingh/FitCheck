@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-
-export type ModesType = 'mentor' | 'recruiter' | 'senior' | 'designer' | 'peer';
+import { ModesType } from '@/lib/constants';
 
 type ModesStructure = {
   [key in ModesType]: {

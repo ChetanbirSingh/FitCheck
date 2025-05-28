@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
-export type Techstack = 'html_css' | 'react' | 'next' | 'vue' | 'svelte' | 'solid' | 'angular';
+import { TechstackTypes } from '@/lib/constants';
 
-export const supportedFileTypes: Record<string, string[]> = {
+export const supportedFileTypes: Record<TechstackTypes, string[]> = {
   html_css: ['.html', '.css', '.js', '.md'],
   react: ['.jsx', '.js', '.css', '.scss', '.md'],
   next: ['.tsx', '.ts', '.jsx', '.js', '.css', '.scss', '.md'],
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-async function fetchMatchingFileNames(githubUrl: string, techstack: Techstack): Promise<string[]> {
+async function fetchMatchingFileNames(githubUrl: string, techstack: TechstackTypes): Promise<string[]> {
   const response = await fetch(githubUrl, {
     headers: {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
