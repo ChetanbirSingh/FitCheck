@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { allowedStacks } from './app/api/extract-files/route';
-import { Techstack } from './app/api/extract-files/route';
-import { allowedPersona } from './components/PersonSelection';
+import { allowedStacks, ModesType } from './lib/constants';
+import { allowedPersona, TechstackTypes } from './lib/constants';
 
 export function middleware(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -11,9 +10,9 @@ export function middleware(req: NextRequest) {
 
   const isValid =
     persona &&
-    allowedPersona.includes(persona) &&
+    allowedPersona.includes(persona as ModesType) &&
     techstack &&
-    allowedStacks.includes(techstack);
+    allowedStacks.includes(techstack as TechstackTypes);
 
   if (isValid) {
     return NextResponse.next();
