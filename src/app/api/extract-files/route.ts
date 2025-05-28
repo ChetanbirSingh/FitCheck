@@ -30,11 +30,17 @@ const ignoredFiles: string[] = [
   'jest.config',
 ];
 
+const allowedStacks = Object.keys(supportedFileTypes) as Techstack[];
+
 export async function POST(req: NextRequest) {
   const { url, techstack } = await req.json();
 
   if (!url) {
     return NextResponse.json({ error: 'Missing GitHub URL.' }, { status: 400 });
+  }
+
+  if (!allowedStacks.includes(techstack)) {
+    return NextResponse.json({ error: 'Invalid tech stack provided.' }, { status: 400 });
   }
 
   const githubUrl = url
