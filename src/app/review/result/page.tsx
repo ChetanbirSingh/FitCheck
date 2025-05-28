@@ -6,15 +6,15 @@ import RepoInputBar from '@/components/RepoInputBar';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { ModesType } from '@/components/PersonSelection';
-import { Techstack } from '@/app/api/extract-files/route';
+import { ModesType } from '@/lib/constants';
+import { TechstackTypes } from '@/lib/constants';
 
 export default function ReviewPage() {
   const { output } = useReviewContext();
 
   const searchParams = useSearchParams();
   const persona = searchParams.get('persona') as ModesType | null;
-  const techstack = searchParams.get('techstack') as Techstack | null;
+  const techstack = searchParams.get('techstack') as TechstackTypes | null;
 
   return (
     <main>

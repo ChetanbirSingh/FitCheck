@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import PersonSelection, { ModesType } from '@/components/PersonSelection';
+import PersonSelection from '@/components/PersonSelection';
 import TechstackSelection from '@/components/TechSelection';
-import { Techstack } from '@/app/api/extract-files/route';
+import { TechstackTypes } from '@/lib/constants';
+import { ModesType } from '@/lib/constants';
 import RepoInputBar from '@/components/RepoInputBar';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -12,12 +13,12 @@ export default function ReviewPage() {
   const router = useRouter();
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [selectedPersona, setSelectedPersona] = useState<ModesType | null>(null);
-  const [selectedTechstack, setSelectedTechstack] = useState<Techstack | null>(null);
+  const [selectedTechstack, setSelectedTechstack] = useState<TechstackTypes | null>(null);
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const persona = searchParams.get('persona') as ModesType;
-    const techstack = searchParams.get('techstack') as Techstack;
+    const techstack = searchParams.get('techstack') as TechstackTypes;
 
     if (persona && techstack) {
       setSelectedPersona(persona);
