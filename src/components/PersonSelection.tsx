@@ -35,6 +35,8 @@ const modes: ModesStructure = {
   },
 };
 
+export const allowedPersona = Object.keys(modes);
+
 export default function PersonSelection({
   handleClick,
 }: {

@@ -30,7 +30,7 @@ const ignoredFiles: string[] = [
   'jest.config',
 ];
 
-const allowedStacks = Object.keys(supportedFileTypes) as Techstack[];
+export const allowedStacks = Object.keys(supportedFileTypes);
 
 export async function POST(req: NextRequest) {
   const { url, techstack } = await req.json();
