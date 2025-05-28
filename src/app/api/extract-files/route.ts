@@ -1,14 +1,14 @@
 import { NextResponse, NextRequest } from 'next/server';
 export type Techstack = 'html_css' | 'react' | 'next' | 'vue' | 'svelte' | 'solid' | 'angular';
 
-export const supportedFileTypes: Record<Techstack, string[]> = {
-  html_css: ['.html', '.css', '.js'],
-  react: ['.jsx', '.js', '.css', '.scss'],
-  next: ['.tsx', '.ts', '.jsx', '.js', '.css', '.scss'],
-  vue: ['.vue', '.js', '.css', '.scss'],
-  svelte: ['.svelte', '.js', '.css'],
-  solid: ['.jsx', '.js', '.ts', '.tsx'],
-  angular: ['.ts', '.html', '.css'],
+export const supportedFileTypes: Record<string, string[]> = {
+  html_css: ['.html', '.css', '.js', '.md'],
+  react: ['.jsx', '.js', '.css', '.scss', '.md'],
+  next: ['.tsx', '.ts', '.jsx', '.js', '.css', '.scss', '.md'],
+  vue: ['.vue', '.js', '.css', '.scss', '.md'],
+  svelte: ['.svelte', '.js', '.css', '.md'],
+  solid: ['.jsx', '.js', '.ts', '.tsx', '.md'],
+  angular: ['.ts', '.html', '.css', '.md'],
 };
 
 const ignoredFiles: string[] = [
