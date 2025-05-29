@@ -4,15 +4,21 @@ import { motion } from 'framer-motion';
 import { TechstackTypes } from '@/lib/constants';
 import { useState } from 'react';
 
-const techStackInfo: Record<TechstackTypes, { caption: string; icon: string }> = {
-  html_css: { caption: 'Static Sites', icon: '🌐' },
-  react: { caption: 'Component-based UI', icon: '⚛️' },
-  next: { caption: 'Fullstack React', icon: '🚀' },
-  vue: { caption: 'Progressive UI', icon: '🖖' },
-  svelte: { caption: 'Compiler Magic', icon: '🔥' },
-  solid: { caption: 'Fine-grained Reactivity', icon: '🧪' },
-  angular: { caption: 'Opinionated Framework', icon: '🛡️' },
+type TechstackInfo = {
+  tech: TechstackTypes;
+  caption: string;
+  icon: string;
 };
+
+const techStackInfo: TechstackInfo[] = [
+  { tech: 'html_css', caption: 'Static Sites', icon: '🌐' },
+  { tech: 'react', caption: 'Component-based UI', icon: '⚛️' },
+  { tech: 'next', caption: 'Fullstack React', icon: '🚀' },
+  { tech: 'vue', caption: 'Progressive UI', icon: '🖖' },
+  { tech: 'svelte', caption: 'Compiler Magic', icon: '🔥' },
+  { tech: 'solid', caption: 'Fine-grained Reactivity', icon: '🧪' },
+  { tech: 'angular', caption: 'Opinionated Framework', icon: '🛡️' },
+];
 
 export default function TechstackSelection({
   handleClick,
@@ -26,7 +32,8 @@ export default function TechstackSelection({
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}>
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         What is your techstack
       </motion.h2>
 
@@ -42,7 +49,7 @@ export default function TechstackSelection({
             dark:[&::-webkit-scrollbar-thumb]:bg-zinc-400/20
             dark:hover:[&::-webkit-scrollbar-thumb]:bg-zinc-400/30'
         >
-          {Object.entries(techStackInfo).map(([tech, { caption, icon }], idx) => {
+          {techStackInfo.map(({ tech, caption, icon }, idx) => {
             const isSelected = selected === tech;
             return (
               <motion.div
