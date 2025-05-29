@@ -25,7 +25,11 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${inter.className}`}>
         <Navbar />
-        <ReviewProvider>{children}</ReviewProvider>
+        <ReviewProvider>
+          <div className='bg-black'>
+            <main className='bg-background rounded-b-[50px]'>{children}</main>
+          </div>
+        </ReviewProvider>
         <Footer />
       </body>
     </html>
