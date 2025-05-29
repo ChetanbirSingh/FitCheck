@@ -43,7 +43,7 @@ export default function ReviewSetup() {
   };
 
   return (
-    <section>
+    <section className='md:pt-2 pt-10'>
       <div className='text-center'>
         <PageHeader title='Setup Review' />
         <div className='flex justify-between w-full max-w-md mx-auto'>
