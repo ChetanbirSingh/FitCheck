@@ -1,9 +1,5 @@
-import ReviewSetup from "@/components/review/ReviewSetup/ReviewSetup";
-export default function ReviewPage() {
+import ReviewSetup from '@/components/review/ReviewSetup/ReviewSetup';
 
-  return (
-    <main>
-      <ReviewSetup />
-    </main>
-  );
+export default function ReviewPage() {
+  return <ReviewSetup />;
 }
