@@ -78,7 +78,7 @@ export default function ReviewPage() {
         />
       </section>
       <div className='my-3'>
-        {persona && techstack && <RepoInputBar persona={persona} framework={techstack} />}
+        {persona && techstack && <RepoInputBar persona={persona} techstack={techstack} />}
       </div>
     </main>
   );

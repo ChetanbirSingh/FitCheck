@@ -14,7 +14,7 @@ const personas = [
   { value: 'peer', label: '🤝 Peer' },
 ];
 
-const frameworks = [
+const techstacks = [
   { value: 'react', label: 'React' },
   { value: 'angular', label: 'Angular' },
   { value: 'next', label: 'Next.js' },
@@ -25,10 +25,10 @@ const frameworks = [
 ];
 
 export default function SelectionPills({
-  framework,
+  techstack,
   persona,
 }: {
-  framework: TechstackTypes;
+  techstack: TechstackTypes;
   persona: ModesType;
 }) {
   const router = useRouter();
@@ -47,7 +47,7 @@ export default function SelectionPills({
   return (
     <>
       <div className='flex flex-wrap gap-3 items-center justify-center mt-6 px-4'>
-        {frameworks.map(({ value, label }, idx) => (
+        {techstacks.map(({ value, label }, idx) => (
           <motion.button
             key={value}
             onClick={() => updateQuery('techstack', value)}
@@ -58,7 +58,7 @@ export default function SelectionPills({
             transition={{ duration: 0.3, delay: idx * 0.05 }}
             className={`px-4 py-1.5 text-sm rounded-full transition-all border cursor-pointer
               ${
-                framework === value
+                techstack === value
                   ? 'bg-[rgba(163,230,53,0.47)] text-white border-lime-400'
                   : 'bg-transparent text-zinc-400 border-zinc-600 hover:border-lime-400 hover:text-white'
               }`}

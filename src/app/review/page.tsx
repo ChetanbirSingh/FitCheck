@@ -75,7 +75,7 @@ export default function ReviewPage() {
         {step === 2 && <TechstackSelection handleClick={(stack) => setSelectedTechstack(stack)} />}
         {step === 3 && selectedTechstack && selectedPersona && (
           <div className='mt-36'>
-            <RepoInputBar framework={selectedTechstack} persona={selectedPersona} />
+            <RepoInputBar techstack={selectedTechstack} persona={selectedPersona} />
           </div>
         )}
       </div>

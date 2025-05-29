@@ -20,10 +20,10 @@ const isValidGitHubUrl = (url: string): boolean => {
 
 export default function RepoInputBar({
   persona,
-  framework,
+  techstack,
 }: {
   persona: ModesType;
-  framework: TechstackTypes;
+  techstack: TechstackTypes;
 }) {
   const [repoUrl, setRepoUrl] = useState('');
   const [error, setError] = useState('');
@@ -33,7 +33,7 @@ export default function RepoInputBar({
     files,
     error: repoFetchError,
     isLoading: isFetchingRepoFiles,
-  } = useRepoFiles(submittedUrl, framework);
+  } = useRepoFiles(submittedUrl, techstack);
   const {
     code,
     error: codeFetchError,
@@ -71,7 +71,7 @@ export default function RepoInputBar({
         setRepoUrl('');
         setSubmittedUrl(repoUrl);
         if (!pathname.startsWith('/review/result')) {
-          router.push(`/review/result/?persona=${persona}&techstack=${framework}`);
+          router.push(`/review/result/?persona=${persona}&techstack=${techstack}`);
         }
         streamSummary(code, persona);
         setFilesList([]);
@@ -99,7 +99,7 @@ export default function RepoInputBar({
         <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
         <div className='ml-10 flex gap-2 p-2'>
           <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
-            {framework.charAt(0).toUpperCase() + framework.slice(1).replace('_', ' ')}
+            {techstack.charAt(0).toUpperCase() + techstack.slice(1).replace('_', ' ')}
           </Badge>
           <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
             {persona.charAt(0).toUpperCase() + persona.slice(1)}
@@ -133,7 +133,7 @@ export default function RepoInputBar({
           </div>
         )}
       </div>
-      <SelectionPills framework={framework} persona={persona} />
+      <SelectionPills techstack={techstack} persona={persona} />
     </>
   );
 }
