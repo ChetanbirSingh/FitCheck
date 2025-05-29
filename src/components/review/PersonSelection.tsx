@@ -5,36 +5,38 @@ import { motion } from 'framer-motion';
 import { ModesType } from '@/lib/constants';
 
 type ModesStructure = {
-  [key in ModesType]: {
-    icon: string;
-    caption: string;
-  };
+  mode: ModesType;
+  icon: string;
+  caption: string;
 };
 
-const modes: ModesStructure = {
-  mentor: {
+const modes: ModesStructure[] = [
+  {
+    mode: 'mentor',
     icon: '🧠',
     caption: 'Growth-focused, honest feedback',
   },
-  recruiter: {
+  {
+    mode: 'recruiter',
     icon: '📋',
     caption: 'Hireability & red flags check',
   },
-  senior: {
+  {
+    mode: 'senior',
     icon: '🧑‍💼',
     caption: 'Engineering-level readiness review',
   },
-  designer: {
+  {
+    mode: 'designer',
     icon: '🎨',
     caption: 'Visual design & UX critique only',
   },
-  peer: {
+  {
+    mode: 'peer',
     icon: '🤝',
     caption: 'Friendly dev-to-dev review',
   },
-};
-
-export const allowedPersona = Object.keys(modes);
+];
 
 export default function PersonSelection({
   handleClick,
@@ -49,12 +51,13 @@ export default function PersonSelection({
         id='choose-persona-heading'
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}>
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         Who do you want feedback from?
       </motion.h2>
 
       <div className='flex justify-center items-center gap-4 flex-wrap p-7'>
-        {Object.entries(modes).map(([mode, { icon, caption }], idx) => {
+        {modes.map(({ mode, icon, caption }, idx) => {
           const isSelected = selected === mode;
           return (
             <motion.div
@@ -72,8 +75,8 @@ export default function PersonSelection({
                 isSelected ? 'bg-accent-lime' : 'bg-transparent'
               }`}
               onClick={() => {
-                setSelected(mode as ModesType);
-                handleClick(mode as ModesType);
+                setSelected(mode);
+                handleClick(mode);
               }}
             >
               <span
