@@ -46,7 +46,7 @@ export default function PersonSelection({
   const [selected, setSelected] = useState<ModesType | null>(null);
 
   return (
-    <section id='choose-persona-section'>
+    <div id='choose-persona-section'>
       <motion.h2
         id='choose-persona-heading'
         initial={{ opacity: 0, y: -20 }}
@@ -94,6 +94,6 @@ export default function PersonSelection({
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }

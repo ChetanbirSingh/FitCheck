@@ -8,6 +8,7 @@ import { ModesType } from '@/lib/constants';
 import RepoInputBar from '@/components/review/RepoInputBar/RepoInputBar';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import PageHeader from '@/components/pageHeader';
 
 export default function ReviewSetup() {
   const router = useRouter();
@@ -42,8 +43,9 @@ export default function ReviewSetup() {
   };
 
   return (
-    <main>
+    <section>
       <div className='text-center'>
+        <PageHeader title='Setup Review' />
         <div className='flex justify-between w-full max-w-md mx-auto'>
           {step > 1 && (
             <button
@@ -59,11 +61,7 @@ export default function ReviewSetup() {
               onClick={handleContinue}
               disabled={(step === 1 && !selectedPersona) || (step === 2 && !selectedTechstack)}
               className={`px-6 py-2 rounded font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ease-in-out transform hover:scale-105
-        ${
-          step === 2
-            ? 'bg-accent-lime text-black hover:bg-lime-300'
-            : 'hover:text-lime-300'
-        }`}
+        ${step === 2 ? 'bg-accent-lime text-black hover:bg-lime-300' : 'hover:text-lime-300'}`}
             >
               {step === 1 ? 'Next →' : 'Start Review'}
             </button>
@@ -78,6 +76,6 @@ export default function ReviewSetup() {
           </div>
         )}
       </div>
-    </main>
+    </section>
   );
 }
