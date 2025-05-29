@@ -99,10 +99,10 @@ export default function RepoInputBar({
         <RepoInputForm {...{ handleSubmit, repoUrl, setRepoUrl, handleBlur, error, filesList }} />
         <div className='ml-10 flex gap-2 p-2'>
           <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
-            {framework}
+            {framework.charAt(0).toUpperCase() + framework.slice(1).replace('_', ' ')}
           </Badge>
           <Badge className='border-[#8a8a8a] text-[#8a8a8a] rounded-full' variant='outline'>
-            {persona}
+            {persona.charAt(0).toUpperCase() + persona.slice(1)}
           </Badge>
         </div>
         {isFetchingRepoFiles && (

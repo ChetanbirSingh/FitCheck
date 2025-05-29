@@ -21,7 +21,7 @@ const frameworks = [
   { value: 'vue', label: 'Vue' },
   { value: 'html_css', label: 'HTML/CSS' },
   { value: 'svelte', label: 'Svelte' },
-  { value: 'solid', label: 'solid' },
+  { value: 'solid', label: 'Solid' },
 ];
 
 export default function SelectionPills({
