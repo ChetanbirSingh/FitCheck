@@ -119,7 +119,7 @@ export default function RepoInputBar({
           <div className='flex items-center justify-center gap-2 text-sm text-blue-400 pb-2'>
             <Info className='w-4 h-4' />
             <span>
-              <p>Please clear the current files to enter a new repo URL.</p>
+              <p>Pick new files and hit submit again to get an updated review.</p>
             </span>
           </div>
         )}
