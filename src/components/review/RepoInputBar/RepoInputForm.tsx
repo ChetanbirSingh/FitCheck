@@ -1,4 +1,6 @@
+'use client';
 import { SendHorizonal } from 'lucide-react';
+import { useReviewContext } from '@/app/hooks/useReviewContext';
 
 type RepoInputFormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -17,6 +19,7 @@ export default function RepoInputForm({
   error,
   filesList,
 }: RepoInputFormProps) {
+  const { isStreaming } = useReviewContext();
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -28,9 +31,10 @@ export default function RepoInputForm({
             type='text'
             placeholder='Enter GitHub repo link...'
             id='url'
-            className={'w-2xl px-8 py-2 bg-transparent text-sm outline-none transition-all'}
+            className={`w-2xl px-8 py-2 bg-transparent text-sm outline-none transition-all 
+              ${filesList.length > 0 || isStreaming ? 'cursor-not-allowed' : 'cursor-auto'}`}
             name='url'
-            disabled={filesList.length > 0 ? true : false}
+            disabled={filesList.length > 0 ? true : false || isStreaming}
             value={repoUrl}
             onChange={(e) => setRepoUrl(e.target.value)}
             onBlur={handleBlur}
