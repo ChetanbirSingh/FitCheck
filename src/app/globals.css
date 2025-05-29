@@ -1,14 +1,14 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #18181b;
-  --foreground: #ffffff;
-  --accent-lime: rgba(163, 230, 53, 0.47);
+@theme {
+  --color-background: #18181b;
+  --color-foreground: #ffffff;
+  --color-accent-lime: rgba(163, 230, 53, 0.47);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 body h1,
@@ -46,8 +46,4 @@ h6 {
 
 p {
   font-size: 1rem;
-}
-
-.bg-accent-lime {
-  background-color: var(--accent-lime);
 }
