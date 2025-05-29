@@ -1,17 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
+import PageHeader from '../pageHeader';
 
 export default function AboutSection() {
   return (
     <section className='max-w-3xl mx-auto md:pt-2 pt-10'>
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        About FitCheck
-      </motion.h1>
-
+      <PageHeader title='About Fitcheck' />
       <motion.p
         className='text-lg text-zinc-300 leading-relaxed'
         initial={{ opacity: 0 }}
