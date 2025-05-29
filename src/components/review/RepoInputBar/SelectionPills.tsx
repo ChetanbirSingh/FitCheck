@@ -4,6 +4,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
+import { motion } from 'framer-motion';
 
 const personas = [
   { value: 'mentor', label: '🧠 Mentor' },
@@ -46,10 +47,15 @@ export default function SelectionPills({
   return (
     <>
       <div className='flex flex-wrap gap-3 items-center justify-center mt-6 px-4'>
-        {frameworks.map(({ value, label }) => (
-          <button
+        {frameworks.map(({ value, label }, idx) => (
+          <motion.button
             key={value}
             onClick={() => updateQuery('techstack', value)}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3, delay: idx * 0.05 }}
             className={`px-4 py-1.5 text-sm rounded-full transition-all border cursor-pointer
               ${
                 framework === value
@@ -58,15 +64,20 @@ export default function SelectionPills({
               }`}
           >
             {label}
-          </button>
+          </motion.button>
         ))}
       </div>
 
       <div className='flex flex-wrap gap-3 items-center justify-center mt-4 px-4'>
-        {personas.map(({ value, label }) => (
-          <button
+        {personas.map(({ value, label }, idx) => (
+          <motion.button
             key={value}
             onClick={() => updateQuery('persona', value)}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3, delay: idx * 0.05 }}
             className={`px-4 py-1.5 text-sm rounded-full transition-all border cursor-pointer
               ${
                 persona === value
@@ -75,7 +86,7 @@ export default function SelectionPills({
               }`}
           >
             {label}
-          </button>
+          </motion.button>
         ))}
       </div>
     </>
