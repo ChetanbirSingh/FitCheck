@@ -10,7 +10,7 @@ import { AlertCircle, Info } from 'lucide-react';
 import SelectionPills from './SelectionPills';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Badge } from '../../ui/badge';
 
 const isValidGitHubUrl = (url: string): boolean => {
@@ -41,6 +41,7 @@ export default function RepoInputBar({
   } = useRepoFileCode(submittedUrl, filesList);
   const { isStreaming, error: reviewError, streamSummary } = useReviewContext();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (files.length > 0) {
@@ -69,7 +70,9 @@ export default function RepoInputBar({
       if (filesList.length > 0) {
         setRepoUrl('');
         setSubmittedUrl(repoUrl);
-        router.push(`/review/result/?persona=${persona}&techstack=${framework}`);
+        if (!pathname.startsWith('/review/result')) {
+          router.push(`/review/result/?persona=${persona}&techstack=${framework}`);
+        }
         streamSummary(code, persona);
       }
     } catch (err) {
