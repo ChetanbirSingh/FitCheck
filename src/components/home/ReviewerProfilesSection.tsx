@@ -66,7 +66,7 @@ export default function ReviewerProfilesSection() {
 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto'>
         {personas.map((p, idx) => (
-          <motion.div
+          <motion.article
             key={p.title}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +91,7 @@ export default function ReviewerProfilesSection() {
                 <span className='font-semibold'>Use When:</span> {p.useWhen}
               </p>
             </div>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
     </section>
