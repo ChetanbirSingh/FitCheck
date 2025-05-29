@@ -25,7 +25,7 @@ export default function HowItWorksSection() {
       <h2 className='mb-12 text-center'>How it works</h2>
       <div className='grid grid-cols-1 [@media(min-width:1000px)]:grid-cols-3 gap-10 max-w-5xl mx-auto'>
         {steps.map(({ icon, title, desc }, idx) => (
-          <motion.div
+          <motion.article
             key={title}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export default function HowItWorksSection() {
               <h3 className='tracking-wide leading-14 pb-2'>{title}</h3>
               <p className='text-zinc-400'>{desc}</p>
             </div>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
     </section>
