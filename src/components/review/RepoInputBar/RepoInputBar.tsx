@@ -74,6 +74,7 @@ export default function RepoInputBar({
           router.push(`/review/result/?persona=${persona}&techstack=${framework}`);
         }
         streamSummary(code, persona);
+        setFilesList([]);
       }
     } catch (err) {
       if (err instanceof Error) {
