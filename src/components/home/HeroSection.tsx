@@ -19,6 +19,7 @@ export default function HeroSection() {
     <section>
       <div className='flex flex-col items-center justify-center'>
         <motion.div
+          aria-hidden={true}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}

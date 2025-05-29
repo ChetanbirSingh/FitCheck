@@ -11,7 +11,7 @@ import SelectionPills from './SelectionPills';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
-import { Badge } from './ui/badge';
+import { Badge } from '../../ui/badge';
 
 const isValidGitHubUrl = (url: string): boolean => {
   const pattern = /^https:\/\/github\.com\/[^\/\s]+\/[^\/\s]+$/;

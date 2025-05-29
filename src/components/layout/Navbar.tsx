@@ -66,7 +66,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => window.open('https://github.com/ChetanbirSingh/FitCheck')}
-            className='px-4 py-2 bg-black text-white rounded-2xl cursor-pointer'
+            className='px-4 py-2 bg-black text-white rounded-xl cursor-pointer'
           >
             GitHub
           </motion.button>
