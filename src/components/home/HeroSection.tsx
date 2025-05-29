@@ -24,7 +24,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section>
+    <section className='md:pt-25 pt-10'>
       <div className='flex flex-col items-center justify-center'>
         <motion.div
           aria-hidden={true}
@@ -32,7 +32,7 @@ export default function HeroSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ transition }}
-          className='text-8xl text-center md:pt-25 pt-10'
+          className='text-8xl text-center'
         >
           {icons[index]}
         </motion.div>
