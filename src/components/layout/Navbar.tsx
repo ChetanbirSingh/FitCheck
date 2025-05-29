@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 const links = [
   { name: 'Home', href: '/' },
   { name: 'Review', href: '/review' },
+  { name: 'About', href: '/about' },
 ];
 
 export default function Navbar() {
