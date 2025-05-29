@@ -29,13 +29,7 @@ export default function TechstackSelection({
 
   return (
     <div className='px-4 py-10 space-y-10 flex justify-center items-center flex-col'>
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-      >
-        What is your techstack
-      </motion.h2>
+      <h2>What is your techstack</h2>
 
       <div className='w-full max-w-6xl'>
         <p className='mb-4 px-2'>💻 We'll analyze files from:</p>

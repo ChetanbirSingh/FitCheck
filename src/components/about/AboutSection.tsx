@@ -20,8 +20,7 @@ export default function AboutSection() {
       <motion.div
         className='space-y-4'
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.6 }}
       >
         <h2 className='md:pt-25 pt-10'>Why it matters:</h2>

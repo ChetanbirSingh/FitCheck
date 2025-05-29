@@ -47,14 +47,7 @@ export default function PersonSelection({
 
   return (
     <div id='choose-persona-section'>
-      <motion.h2
-        id='choose-persona-heading'
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-      >
-        Who do you want feedback from?
-      </motion.h2>
+      <h2 id='choose-persona-heading'>Who do you want feedback from?</h2>
 
       <div className='flex justify-center items-center gap-4 flex-wrap p-7'>
         {modes.map(({ mode, icon, caption }, idx) => {

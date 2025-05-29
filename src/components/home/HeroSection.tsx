@@ -29,8 +29,7 @@ export default function HeroSection() {
         <motion.div
           aria-hidden={true}
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ transition }}
           className='text-8xl text-center'
         >
@@ -39,8 +38,7 @@ export default function HeroSection() {
 
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ transition }}
           className='max-w-3xl pt-10'
         >
@@ -48,8 +46,7 @@ export default function HeroSection() {
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ transition }}
           className='max-w-3xl leading-relaxed'
         >
@@ -62,8 +59,7 @@ export default function HeroSection() {
             bg-white text-black font-semibold text-base shadow-md hover:shadow-lg hover:bg-gray-300'
             type='button'
             initial={{ scale: 0.5, opacity: 0, rotate: -10 }}
-            whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
-            viewport={{ once: true }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{
@@ -81,8 +77,7 @@ export default function HeroSection() {
             text-white font-semibold text-base  bg-accent-lime'
             type='button'
             initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
+            animate={{ scale: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => window.open('https://github.com/ChetanbirSingh/FitCheck')}
