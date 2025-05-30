@@ -71,7 +71,7 @@ export default function ReviewSetup() {
         {step === 1 && <PersonSelection handleClick={(mode) => setSelectedPersona(mode)} />}
         {step === 2 && <TechstackSelection handleClick={(stack) => setSelectedTechstack(stack)} />}
         {step === 3 && selectedTechstack && selectedPersona && (
-          <div className='mt-36'>
+          <div className='mt-36 pb-20'>
             <RepoInputBar techstack={selectedTechstack} persona={selectedPersona} />
           </div>
         )}
