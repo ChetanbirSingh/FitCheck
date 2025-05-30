@@ -10,6 +10,7 @@ export const footerSections = [
     links: [
       { label: 'Get a Review', href: '/review' },
       { label: 'About Project', href: '/about' },
+      { label: 'Terms & Conditions', href: '/terms' },
       {
         label: 'GitHub Repo',
         href: 'https://github.com/ChetanbirSingh/FitCheck',
@@ -27,7 +28,6 @@ export default function Footer() {
   return (
     <footer className='text-white bg-black px-6 md:px-10 py-16'>
       <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10'>
-
         <div className='space-y-3'>
           <h2 className='text-2xl font-bold'>{footerSections[0].title}</h2>
           <p className='text-sm max-w-xs text-zinc-400'>{footerSections[0].description}</p>
@@ -59,7 +59,7 @@ export default function Footer() {
                       >
                         {link.label}
                       </Link>
-                    )
+                    ),
                   )}
                 </div>
               )}
