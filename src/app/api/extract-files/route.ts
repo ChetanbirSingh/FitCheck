@@ -1,36 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { TechstackTypes } from '@/lib/constants';
-
-export const supportedFileTypes: Record<TechstackTypes, string[]> = {
-  html_css: ['.html', '.css', '.js', '.md'],
-  react: ['.jsx', '.js', '.css', '.scss', '.md'],
-  next: ['.tsx', '.ts', '.jsx', '.js', '.css', '.scss', '.md'],
-  vue: ['.vue', '.js', '.css', '.scss', '.md'],
-  svelte: ['.svelte', '.js', '.css', '.md'],
-  solid: ['.jsx', '.js', '.ts', '.tsx', '.md'],
-  angular: ['.ts', '.html', '.css', '.md'],
-};
-
-const ignoredFiles: string[] = [
-  'layout',
-  '_app',
-  '_document',
-  '_layout',
-  '_middleware',
-  'middleware',
-  'serviceWorker',
-  '.config',
-  '.test',
-  '.spec',
-  'vite.config',
-  'tailwind.config',
-  'postcss.config',
-  'webpack.config',
-  'babel.config',
-  'jest.config',
-];
-
-export const allowedStacks = Object.keys(supportedFileTypes);
+import { TechstackTypes, allowedStacks, supportedFileTypes, ignoredFiles } from '@/lib/constants';
 
 export async function POST(req: NextRequest) {
   const { url, techstack } = await req.json();
@@ -59,7 +28,10 @@ export async function POST(req: NextRequest) {
   }
 }
 
-async function fetchMatchingFileNames(githubUrl: string, techstack: TechstackTypes): Promise<string[]> {
+async function fetchMatchingFileNames(
+  githubUrl: string,
+  techstack: TechstackTypes,
+): Promise<string[]> {
   const response = await fetch(githubUrl, {
     headers: {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
