@@ -115,23 +115,25 @@ export default function RepoInputBar({
           <p className='text-sm text-gray-500 text-center pb-2'>Reviewing in progress</p>
         )}
 
-        {filesList.length > 0 && (
-          <div className='flex items-center justify-center gap-2 text-sm text-blue-400 pb-2'>
-            <Info className='w-4 h-4' />
-            <span>
-              <p>Pick new files and hit submit again to get an updated review.</p>
-            </span>
-          </div>
-        )}
+        <div className='pb-2 px-2 space-y-2'>
+          {filesList.length > 0 && (
+            <div className='flex gap-3 text-sm text-blue-400 items-center md:justify-center'>
+              <Info className='w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0' />
+              <p className='leading-relaxed'>
+                Pick new files and hit submit again to get an updated review.
+              </p>
+            </div>
+          )}
 
-        {(error || codeFetchError || repoFetchError || reviewError) && (
-          <div className='flex items-center justify-center gap-2 text-sm text-red-500 font-medium pb-2'>
-            <AlertCircle className='w-4 h-4' />
-            <span>
-              <p>{error || codeFetchError?.message || repoFetchError?.message || reviewError}</p>
-            </span>
-          </div>
-        )}
+          {(error || codeFetchError || repoFetchError || reviewError) && (
+            <div className='flex gap-3 text-sm text-red-500 font-medium md:justify-center'>
+              <AlertCircle className='w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0' />
+              <p className='leading-relaxed'>
+                {error || codeFetchError?.message || repoFetchError?.message || reviewError}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
       <SelectionPills techstack={techstack} persona={persona} />
     </>

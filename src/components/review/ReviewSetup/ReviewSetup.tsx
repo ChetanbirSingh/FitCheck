@@ -46,7 +46,7 @@ export default function ReviewSetup() {
     <section className='md:pt-2 pt-10'>
       <div className='text-center'>
         <PageHeader title='Setup Review' />
-        <div className='flex justify-between w-full max-w-md mx-auto'>
+        <div className='flex justify-between w-full max-w-md mx-auto px-2'>
           {step > 1 && (
             <button
               onClick={handleBack}
@@ -71,7 +71,7 @@ export default function ReviewSetup() {
         {step === 1 && <PersonSelection handleClick={(mode) => setSelectedPersona(mode)} />}
         {step === 2 && <TechstackSelection handleClick={(stack) => setSelectedTechstack(stack)} />}
         {step === 3 && selectedTechstack && selectedPersona && (
-          <div className='mt-36 pb-20'>
+          <div className='mt-36 pb-20 px-2'>
             <RepoInputBar techstack={selectedTechstack} persona={selectedPersona} />
           </div>
         )}
