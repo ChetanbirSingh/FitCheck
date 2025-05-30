@@ -5,7 +5,7 @@ const redis = Redis.fromEnv();
 
 const dailyLimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.fixedWindow(1, '24h'),
+  limiter: Ratelimit.fixedWindow(5, '24h'),
   prefix: 'daily_limit',
 });
 
