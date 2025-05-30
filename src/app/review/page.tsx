@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 export default function ReviewPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <ReviewSetup />
     </Suspense>
   );
