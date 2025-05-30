@@ -1,8 +1,14 @@
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { checkRateLimit } from '@/lib/ratelimit';
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
+  const rate = await checkRateLimit(ip);
+  if (rate.limited) {
+    return NextResponse.json({ error: rate.message }, { status: rate.status });
+  }
   const { code, persona } = await req.json();
 
   const envKey = `${persona}_PROMPT`.toUpperCase();

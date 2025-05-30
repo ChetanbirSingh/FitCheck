@@ -1,4 +1,5 @@
 'use client';
+import { NextResponse } from 'next/server';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface ReviewType {
@@ -32,6 +33,11 @@ export const ReviewProvider = ({ children }: { children: ReactNode }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, persona }),
       });
+
+      if (!res.ok) {
+        throw new Error((await res.json()).error || 'Unknown error occurred');
+      }
+
       // Get the reader from the streamed response body
       const reader = res.body?.getReader();
       // Set up a decoder to turn binary to readable text
