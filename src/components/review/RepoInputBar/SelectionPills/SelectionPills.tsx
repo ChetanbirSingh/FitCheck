@@ -6,6 +6,7 @@ import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
 import { motion } from 'framer-motion';
 import { useReviewContext } from '@/app/hooks/useReviewContext';
+import Pill from './Pill';
 
 const personas = [
   { value: 'mentor', label: '🧠 Mentor' },
@@ -50,49 +51,17 @@ export default function SelectionPills({
     <>
       <div className='flex flex-wrap gap-3 items-center justify-center mt-6 px-4'>
         {techstacks.map(({ value, label }, idx) => (
-          <motion.button
-            key={value}
-            onClick={() => !isStreaming && updateQuery('techstack', value)}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3, delay: idx * 0.05 }}
-            className={`px-4 py-1.5 text-sm rounded-full transition-all border
-              ${
-                techstack === value
-                  ? 'bg-[rgba(163,230,53,0.47)] text-white border-lime-400'
-                  : 'bg-transparent text-zinc-400 border-zinc-600 hover:border-lime-400 hover:text-white'
-              }
-              ${isStreaming ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-            disabled={isStreaming}
-          >
-            {label}
-          </motion.button>
+          <Pill key={value + idx}
+            {...{ value, updateQuery, idx, queryKey: 'techstack', label, selectedValue: techstack }}
+          />
         ))}
       </div>
 
       <div className='flex flex-wrap gap-3 items-center justify-center mt-4 px-4'>
         {personas.map(({ value, label }, idx) => (
-          <motion.button
-            key={value}
-            onClick={() => !isStreaming && updateQuery('persona', value)}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3, delay: idx * 0.05 }}
-            className={`px-4 py-1.5 text-sm rounded-full transition-all border
-              ${
-                persona === value
-                  ? 'bg-[rgba(163,230,53,0.47)] text-white border-lime-400'
-                  : 'bg-transparent text-zinc-400 border-zinc-600 hover:border-lime-400 hover:text-white'
-              } 
-                  ${isStreaming ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-            disabled={isStreaming}
-          >
-            {label}
-          </motion.button>
+          <Pill key={value + idx}
+            {...{ value, updateQuery, idx, queryKey: 'persona', label, selectedValue: persona }}
+          />
         ))}
       </div>
     </>

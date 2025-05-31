@@ -7,7 +7,7 @@ import { useRepoFiles } from '@/app/hooks/useRepoFiles';
 import { useRepoFileCode } from '@/app/hooks/useRepoFileCode';
 import { useReviewContext } from '@/app/hooks/useReviewContext';
 import { AlertCircle, Info } from 'lucide-react';
-import SelectionPills from './SelectionPills';
+import SelectionPills from './SelectionPills/SelectionPills';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
 import { usePathname, useRouter } from 'next/navigation';
