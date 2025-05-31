@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 export default function ReviewPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<div className='min-h-screen'></div>}>
       <ReviewSetup />
     </Suspense>
   );
