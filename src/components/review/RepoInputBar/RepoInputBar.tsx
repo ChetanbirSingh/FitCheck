@@ -33,6 +33,7 @@ export default function RepoInputBar({
     files,
     error: repoFetchError,
     isLoading: isFetchingRepoFiles,
+    mutate: reFetchFiles,
   } = useRepoFiles(submittedUrl, techstack);
   const {
     code,
@@ -66,10 +67,16 @@ export default function RepoInputBar({
       setError('Please enter a valid GitHub repository URL (e.g., https://github.com/user/repo).');
       return;
     }
+    setSubmittedUrl(repoUrl);
+    let freshFiles = filesList;
+    if (filesList.length === 0) {
+      freshFiles = await reFetchFiles();
+      setFilesList(freshFiles);
+    }
     try {
+      await reFetchFiles();
       if (filesList.length > 0) {
         setRepoUrl('');
-        setSubmittedUrl(repoUrl);
         if (!pathname.startsWith('/review/result')) {
           router.push(`/review/result/?persona=${persona}&techstack=${techstack}`);
         }

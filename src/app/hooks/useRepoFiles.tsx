@@ -14,7 +14,7 @@ const fetchFiles = async (url: string, techstack: string) => {
 
 export function useRepoFiles(repoUrl: string, techstack: string) {
   const isValid = repoUrl && techstack;
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     isValid ? [repoUrl, techstack] : null,
     ([url, stack]) => fetchFiles(url, stack)
   );
@@ -23,5 +23,6 @@ export function useRepoFiles(repoUrl: string, techstack: string) {
     files: data || [],
     error,
     isLoading,
+    mutate
   };
 }
