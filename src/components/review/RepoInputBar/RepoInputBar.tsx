@@ -68,14 +68,14 @@ export default function RepoInputBar({
       return;
     }
     setSubmittedUrl(repoUrl);
-    let freshFiles = filesList;
-    if (filesList.length === 0) {
-      freshFiles = await reFetchFiles();
-      setFilesList(freshFiles);
-    }
     try {
-      await reFetchFiles();
-      if (filesList.length > 0) {
+      if (filesList.length === 0) {
+        const fetchedFiles = await reFetchFiles();
+        if (Array.isArray(fetchedFiles)) {
+          setFilesList(fetchedFiles);
+        }
+        return;
+      } else if (filesList.length > 0) {
         setRepoUrl('');
         if (!pathname.startsWith('/review/result')) {
           router.push(`/review/result/?persona=${persona}&techstack=${techstack}`);
@@ -90,7 +90,6 @@ export default function RepoInputBar({
         setError('An unexpected error occurred.');
       }
     }
-    setSubmittedUrl(repoUrl);
   }
 
   const handleRemove = (fileToRemove: string) => {
