@@ -8,7 +8,7 @@ import { Check } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
-import PageHeader from '@/components/pageHeader';
+import PageHeader from '@/components/ui/pageHeader';
 
 export default function ReviewOutput() {
   const { output } = useReviewContext();

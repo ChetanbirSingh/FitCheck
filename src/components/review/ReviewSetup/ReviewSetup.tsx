@@ -8,7 +8,7 @@ import { ModesType } from '@/lib/constants';
 import RepoInputBar from '@/components/review/RepoInputBar/RepoInputBar';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/pageHeader';
+import PageHeader from '@/components/ui/pageHeader';
 
 export default function ReviewSetup() {
   const router = useRouter();

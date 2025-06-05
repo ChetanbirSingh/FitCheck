@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-export default function Paragraph({ text }: { text: string }) {
+import { ReactNode } from 'react';
+
+export default function Paragraph({ children }: { children: ReactNode }) {
   return (
     <motion.p
       className='text-lg text-zinc-300 leading-relaxed'
@@ -8,7 +10,7 @@ export default function Paragraph({ text }: { text: string }) {
       viewport={{ once: true }}
       transition={{ delay: 0.2, duration: 0.6 }}
     >
-      {text}
+      {children}
     </motion.p>
   );
 }
