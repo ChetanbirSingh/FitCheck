@@ -135,7 +135,7 @@ export default function RepoInputBar({
             <div className='flex gap-3 text-sm text-red-500 font-medium md:justify-center'>
               <AlertCircle className='w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0' />
               <p className='leading-relaxed'>
-                {error || codeFetchError?.message || repoFetchError || reviewError}
+                {error || codeFetchError || repoFetchError || reviewError}
               </p>
             </div>
           )}
