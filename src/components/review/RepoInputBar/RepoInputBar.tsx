@@ -3,8 +3,8 @@
 import { FormEvent, useEffect, useState } from 'react';
 import FileChipList from './FileChipList';
 import RepoInputForm from './RepoInputForm';
-import { useRepoFiles } from '@/app/hooks/useRepoFiles';
-import { useRepoFileCode } from '@/app/hooks/useRepoFileCode';
+import { useRepoFiles } from '@/app/hooks/useRepoFiles/useRepoFiles';
+import { useRepoFileCode } from '@/app/hooks/useRepoFileCode/useRepoFileCode';
 import { useReviewContext } from '@/app/hooks/useReviewContext';
 import { AlertCircle, Info } from 'lucide-react';
 import SelectionPills from './SelectionPills/SelectionPills';
@@ -135,7 +135,7 @@ export default function RepoInputBar({
             <div className='flex gap-3 text-sm text-red-500 font-medium md:justify-center'>
               <AlertCircle className='w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0' />
               <p className='leading-relaxed'>
-                {error || codeFetchError?.message || repoFetchError?.message || reviewError}
+                {error || codeFetchError?.message || repoFetchError || reviewError}
               </p>
             </div>
           )}
