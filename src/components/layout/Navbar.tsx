@@ -66,7 +66,7 @@ export default function Navbar() {
             animate={{ scale: 1 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => window.open('https://github.com/ChetanbirSingh/FitCheck')}
+            onClick={() => window.open('https://github.com/ChetanbirSingh/FitCheck', '_blank', 'noopener,noreferrer')}
             className='px-4 py-2 bg-black text-white rounded-xl cursor-pointer'
           >
             GitHub
