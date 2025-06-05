@@ -57,20 +57,10 @@ The motivation behind FitCheck was to help developers — especially students an
 
 ## 🐞 Known Bugs
 
-### 🔧 Functional Bugs
-
-#### 🔁 Duplicate URL Submission Doesn’t Trigger Review
-If a user submits the same GitHub repo twice in a row, the app doesn't trigger a re-review — likely due to unchanged state not re-firing the request.  
-**Temporary Fix:** Refresh the page or slightly change the URL (e.g., add/remove a trailing space).  
-**Planned:** Force state reset or manual re-fetch logic.
-
-#### 🔄 Persona & Techstack Can Be Changed Mid-Review
-Users can change the selected mode or stack after clicking submit, which may cause review mismatches.  
-**Planned:** Disable selection buttons as soon as the review starts and re-enable only after it's done.
-
----
+All previously known bugs have been resolved or are no longer relevant based on recent updates.
 
 📬 [Submit a bug or view open issues](https://github.com/ChetanbirSingh/FitCheck/issues)
+
 ## Installation and Setup
 
 ### Prerequisites
