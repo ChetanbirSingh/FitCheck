@@ -75,13 +75,13 @@ export default function Footer() {
           ))}
         </div>
       </div>
-
-      <div className='mt-10 border-t border-zinc-800 pt-6 text-xs text-zinc-600 text-center'>
+      <div className='mt-10 border-t border-zinc-800 pt-6 text-xs text-zinc-400 text-center'>
         &copy; 2025 FitCheck. Crafted with care by{' '}
         <a
           href='https://github.com/ChetanbirSingh'
           target='_blank'
-          className='hover:underline hover:text-accent-lime'
+          rel='noopener noreferrer'
+          className='hover:underline hover:text-lime-300 transition-colors'
         >
           Chetanbir Singh
         </a>
