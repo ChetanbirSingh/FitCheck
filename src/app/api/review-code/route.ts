@@ -2,6 +2,7 @@ import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit } from '@/lib/ratelimit';
+import { formatCodeToString } from '@/utils/format/formatCode';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
@@ -28,16 +29,4 @@ export async function POST(req: NextRequest) {
   });
 
   return result.toTextStreamResponse();
-}
-
-function formatCodeToString(codeObj: Record<string, { code: string }>) {
-  return Object.entries(codeObj)
-    .map(([filename, { code }]) => {
-      const trimmedCode = code
-        .split('\n')
-        .map((line) => line.trimStart())
-        .join('\n');
-      return `${filename}\n\`\`\`\n${trimmedCode}\n\`\`\``;
-    })
-    .join('\n\n');
 }
