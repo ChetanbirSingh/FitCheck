@@ -34,7 +34,14 @@ export const ReviewProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (!res.ok) {
-        throw new Error((await res.json()).error || 'Unknown error occurred');
+        let message = 'Something went wrong';
+        try {
+          const data = await res.json();
+          message = data?.error || message;
+        } catch {
+          // Ignore non-JSON error responses
+        }
+        throw new Error(message);
       }
 
       // Get the reader from the streamed response body
