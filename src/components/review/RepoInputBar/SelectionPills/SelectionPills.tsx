@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
 import { motion } from 'framer-motion';
-import { useReviewContext } from '@/app/hooks/useReviewContext';
+import { useReviewContext } from '@/app/hooks/useReviewContext/useReviewContext';
 import Pill from './Pill';
 
 const personas = [

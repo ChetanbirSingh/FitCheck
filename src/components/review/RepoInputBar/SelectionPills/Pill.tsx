@@ -1,5 +1,5 @@
 'use client';
-import { useReviewContext } from '@/app/hooks/useReviewContext';
+import { useReviewContext } from '@/app/hooks/useReviewContext/useReviewContext';
 import { motion } from 'framer-motion';
 
 interface PillInterface {

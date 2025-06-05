@@ -5,7 +5,7 @@ import FileChipList from './FileChipList';
 import RepoInputForm from './RepoInputForm';
 import { useRepoFiles } from '@/app/hooks/useRepoFiles/useRepoFiles';
 import { useRepoFileCode } from '@/app/hooks/useRepoFileCode/useRepoFileCode';
-import { useReviewContext } from '@/app/hooks/useReviewContext';
+import { useReviewContext } from '@/app/hooks/useReviewContext/useReviewContext';
 import { AlertCircle, Info } from 'lucide-react';
 import SelectionPills from './SelectionPills/SelectionPills';
 import { ModesType } from '@/lib/constants';

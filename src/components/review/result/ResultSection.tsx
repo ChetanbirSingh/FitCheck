@@ -1,7 +1,7 @@
 'use client';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'; // Enables GitHub Flavored Markdown (tables, strikethrough, task lists, autolinks, etc.)
-import { useReviewContext } from '@/app/hooks/useReviewContext';
+import { useReviewContext } from '@/app/hooks/useReviewContext/useReviewContext';
 import RepoInputBar from '@/components/review/RepoInputBar/RepoInputBar';
 import Link from 'next/link';
 import { Check } from 'lucide-react';

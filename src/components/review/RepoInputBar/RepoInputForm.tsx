@@ -1,6 +1,6 @@
 'use client';
 import { SendHorizonal } from 'lucide-react';
-import { useReviewContext } from '@/app/hooks/useReviewContext';
+import { useReviewContext } from '@/app/hooks/useReviewContext/useReviewContext';
 
 type RepoInputFormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
