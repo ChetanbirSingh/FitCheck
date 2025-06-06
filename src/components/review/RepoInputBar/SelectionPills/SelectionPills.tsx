@@ -4,7 +4,6 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
-import { motion } from 'framer-motion';
 import { useReviewContext } from '@/app/hooks/useReviewContext/useReviewContext';
 import Pill from './Pill';
 
@@ -12,7 +11,7 @@ const personas = [
   { value: 'mentor', label: '🧠 Mentor' },
   { value: 'recruiter', label: '📋 Recruiter' },
   { value: 'senior', label: '🧑‍💼 Senior' },
-  { value: 'uiux', label: '🎨 UI/UX' },
+  { value: 'designer', label: '🎨 UI/UX' },
   { value: 'peer', label: '🤝 Peer' },
 ];
 
