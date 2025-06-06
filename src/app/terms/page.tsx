@@ -51,7 +51,7 @@ const termsSection = [
 export default function TermsPage() {
   return (
     <section className='max-w-4xl mx-auto py-10 px-6 text-zinc-300'>
-      <h1>🧾 Terms and Conditions</h1>
+      <h1>Terms and Conditions</h1>
       <p className='text-sm text-zinc-400 mb-8'>Last updated: May 30, 2025</p>
       {termsSection.map((section, index) => (
         <article key={index} className='relative mb-14'>
@@ -67,7 +67,7 @@ export default function TermsPage() {
           )}
         </article>
       ))}
-      <p className='mt-16 text-sm text-zinc-500'>
+      <p className='mt-16 text-sm text-zinc-300'>
         By using FitCheck, you agree to these Terms and Conditions.
       </p>
     </section>
