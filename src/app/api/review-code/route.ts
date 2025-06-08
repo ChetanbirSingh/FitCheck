@@ -3,14 +3,23 @@ import { streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit } from '@/lib/ratelimit';
 import { formatCodeToString } from '@/utils/format/formatCode';
+import { allowedPersona } from '@/lib/constants';
+import { ModesType } from '@/lib/constants';
 
 export async function POST(req: NextRequest) {
+  const { code, persona } = await req.json();
+  const isValidPersona = allowedPersona.includes(persona as ModesType);
+  if (!isValidPersona) {
+    return NextResponse.json(
+      { error: 'Invalid persona. Please choose one of the supported personas.' },
+      { status: 400 },
+    );
+  }
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
   const rate = await checkRateLimit(ip);
   if (rate.limited) {
     return NextResponse.json({ error: rate.message }, { status: rate.status });
   }
-  const { code, persona } = await req.json();
 
   const envKey = `${persona}_PROMPT`.toUpperCase();
   const prompt =
