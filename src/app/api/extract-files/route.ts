@@ -5,11 +5,14 @@ export async function POST(req: NextRequest) {
   const { url, techstack } = await req.json();
 
   if (!url) {
-    return NextResponse.json({ error: 'Missing GitHub URL.' }, { status: 400 });
+    return NextResponse.json({ error: 'GitHub repository URL is required.' }, { status: 400 });
   }
 
   if (!allowedStacks.includes(techstack)) {
-    return NextResponse.json({ error: 'Invalid tech stack provided.' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Invalid tech stack. Please select a supported option.' },
+      { status: 400 },
+    );
   }
 
   const githubUrl = url
