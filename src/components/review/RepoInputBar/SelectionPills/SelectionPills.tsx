@@ -4,7 +4,6 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 import { ModesType } from '@/lib/constants';
 import { TechstackTypes } from '@/lib/constants';
-import { useReviewContext } from '@/app/hooks/useReviewContext/useReviewContext';
 import Pill from './Pill';
 
 const personas = [
@@ -35,7 +34,6 @@ export default function SelectionPills({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { isStreaming } = useReviewContext();
 
   const updateQuery = useCallback(
     (key: string, value: string) => {
