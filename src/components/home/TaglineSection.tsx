@@ -14,12 +14,10 @@ export default function TaglineSection() {
             repeat: Infinity,
             repeatType: 'loop',
             ease: 'linear',
-            duration: 15,
+            duration: 10,
           }}
         >
           <h2 className='sr-only'>{text}</h2>
-          <span aria-hidden='true'>{text}</span>
-          <span aria-hidden='true'>{text}</span>
           <span aria-hidden='true'>{text}</span>
         </motion.div>
       </div>
