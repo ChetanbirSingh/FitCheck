@@ -9,7 +9,7 @@ export default function TaglineSection() {
       <div className='bg-accent-lime h-46 overflow-hidden relative'>
         <motion.div
           className='absolute top-1/2 -translate-y-1/2 text-[128px] font-extrabold whitespace-nowrap'
-          animate={{ x: ['20%', '-100%'] }}
+          animate={{ x: ['60%', '-100%'] }}
           transition={{
             repeat: Infinity,
             repeatType: 'loop',
