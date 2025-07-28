@@ -22,11 +22,11 @@ const techStackInfo: TechstackInfo[] = [
 
 export default function TechstackSelection({
   handleClick,
+  selected,
 }: {
   handleClick: (tech: TechstackTypes) => void;
+  selected: TechstackTypes | null;
 }) {
-  const [selected, setSelected] = useState<TechstackTypes | null>(null);
-
   return (
     <div className='px-4 py-10 space-y-10 flex justify-center items-center flex-col'>
       <h2>What is your techstack</h2>
@@ -63,7 +63,6 @@ export default function TechstackSelection({
                     : 'bg-zinc-900 border-zinc-700'
                 }`}
                 onClick={() => {
-                  setSelected(tech as TechstackTypes);
                   handleClick(tech as TechstackTypes);
                 }}
               >

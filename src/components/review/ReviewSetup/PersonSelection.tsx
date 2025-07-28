@@ -40,11 +40,11 @@ const modes: ModesStructure[] = [
 
 export default function PersonSelection({
   handleClick,
+  selected,
 }: {
   handleClick: (mode: ModesType) => void;
+  selected: ModesType | null;
 }) {
-  const [selected, setSelected] = useState<ModesType | null>(null);
-
   return (
     <div id='choose-persona-section'>
       <h2 id='choose-persona-heading'>Who do you want feedback from?</h2>
@@ -67,10 +67,7 @@ export default function PersonSelection({
               className={`w-full md:w-[300px] lg:w-[400px] h-auto flex flex-col justify-center items-center p-9 cursor-pointer rounded-l transition-colors duration-300 hover:bg-[rgba(163,230,53,0.47)] ${
                 isSelected ? 'bg-accent-lime' : 'bg-transparent'
               }`}
-              onClick={() => {
-                setSelected(mode);
-                handleClick(mode);
-              }}
+              onClick={() => handleClick(mode)}
             >
               <span
                 className='text-[64px] md:text-[80px] mb-4'
